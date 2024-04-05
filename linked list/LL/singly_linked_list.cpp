@@ -144,6 +144,17 @@ public:
         free(ptr);
         return head;
     }
+    int finding_middle_of_ll(node* head)
+    {
+        node* slow=head;
+        node* fast=head;
+        while(fast!=nullptr && fast->next!=nullptr)
+        {
+            fast=fast->next->next;
+            slow=slow->next;
+        }
+        return slow->data;
+    }
 };
 int main()
 {
@@ -169,4 +180,5 @@ int main()
     l.printing(head);
     head=l.delete_at_position(head,3);
     l.printing(head);
+    cout<<l.finding_middle_of_ll(head)<<endl;
 }
