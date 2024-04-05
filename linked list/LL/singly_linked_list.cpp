@@ -177,6 +177,80 @@ public:
         delete slow;
         return head;
     }
+    node*  loop_detection(node* head)
+    {
+        node* fast=head;
+        node* slow=head;
+        while(fast && fast->next)
+        {
+            fast=fast->next->next;
+            slow=slow->next;
+            if(slow==fast)
+            {
+                return fast;
+            }
+        }
+        return nullptr;
+    }
+    node *firstNode(node *head)
+    {
+    //    Write your code here.
+        node* fast=loop_detection(head);
+        node* slow=head;
+        if(fast==nullptr)
+        {
+            return nullptr;
+        }
+        while(slow!=fast)
+        {
+            slow=slow->next;
+            fast=fast->next;
+            if(slow==fast)
+            {
+                return slow;
+            }
+        }
+    
+    }
+    int lengthOfLoop(node *head) {
+
+    // Write your code here
+
+    node* slow= head;
+
+    node* fast =head;
+
+    int cnt=1;
+
+    while(fast && fast->next){
+
+        slow=slow->next;
+
+        fast=fast->next->next;
+
+        if (fast==slow){
+
+            fast=fast->next;
+
+            while(fast!=slow){
+
+                cnt++;
+
+                fast = fast->next;
+
+            }
+
+            return cnt;
+
+        }
+
+        
+
+    }
+
+    return 0;
+
+}
     
 };
 int main()
