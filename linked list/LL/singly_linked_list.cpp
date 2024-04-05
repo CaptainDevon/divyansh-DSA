@@ -81,7 +81,7 @@ public:
     {
         node *newnode = new node(number, nullptr);
         node *ptr = head;
-        while (ptr->next!= nullptr)
+        while (ptr->next != nullptr)
         {
             ptr = ptr->next;
         }
@@ -105,56 +105,79 @@ public:
 
     node *delete_from_beginning(node *head)
     {
-        node *temp =head;
-        head=head->next;
+        node *temp = head;
+        head = head->next;
         free(temp);
         return head;
     }
-    node* delete_at_end(node* head)
+    node *delete_at_end(node *head)
     {
-        node* ptr=head;
-        while(ptr->next!=nullptr)
+        node *ptr = head;
+        while (ptr->next != nullptr)
         {
-            ptr=ptr->next;
+            ptr = ptr->next;
         }
-        node* ptrp=head;
-        while(ptrp->next!=ptr)
+        node *ptrp = head;
+        while (ptrp->next != ptr)
         {
-            ptrp=ptrp->next;
+            ptrp = ptrp->next;
         }
         free(ptr);
-        ptrp->next=nullptr;
+        ptrp->next = nullptr;
         return head;
     }
-    node* delete_at_position(node* head,int pos)
+    node *delete_at_position(node *head, int pos)
     {
-        int count=0;
-        node* ptr=head;
-        node* ptrp=head;
-        while(count<pos)
+        int count = 0;
+        node *ptr = head;
+        node *ptrp = head;
+        while (count < pos)
         {
             count++;
-            ptr=ptr->next;
+            ptr = ptr->next;
         }
-        while(ptrp->next!=ptr)
+        while (ptrp->next != ptr)
         {
-            ptrp=ptrp->next;
+            ptrp = ptrp->next;
         }
-        ptrp->next=ptr->next;
+        ptrp->next = ptr->next;
         free(ptr);
         return head;
     }
-    int finding_middle_of_ll(node* head)
+    int finding_middle_of_ll(node *head)
     {
-        node* slow=head;
-        node* fast=head;
-        while(fast!=nullptr && fast->next!=nullptr)
+        node *slow = head;
+        node *fast = head;
+        while (fast != nullptr && fast->next != nullptr)
         {
-            fast=fast->next->next;
-            slow=slow->next;
+            fast = fast->next->next;
+            slow = slow->next;
         }
         return slow->data;
     }
+    node *deleteMiddle(node *head)
+    {
+
+        // Write your code here.
+
+        if (head->next == nullptr) {
+            delete head;
+            return nullptr;
+        }
+        node* slow = head;
+        node* fast = head;
+        node* prev = nullptr;
+        while (fast && fast->next) {
+            prev = slow;
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        prev->next = slow->next;
+        slow->next = nullptr;
+        delete slow;
+        return head;
+    }
+    
 };
 int main()
 {
@@ -176,9 +199,11 @@ int main()
     l.printing(head);
     head = l.delete_from_beginning(head);
     l.printing(head);
-    head=l.delete_at_end(head);
+    head = l.delete_at_end(head);
     l.printing(head);
-    head=l.delete_at_position(head,3);
+    head = l.delete_at_position(head, 3);
     l.printing(head);
-    cout<<l.finding_middle_of_ll(head)<<endl;
+    cout << l.finding_middle_of_ll(head) << endl;
+    head = l.deleteMiddle(head);
+    l.printing(head);
 }
