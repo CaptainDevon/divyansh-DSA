@@ -251,6 +251,85 @@ public:
     return 0;
 
 }
+node* reverselist(node* head) {
+
+    node* prev = nullptr;
+
+    node* curr = head;
+
+    while (curr != nullptr) {
+
+        node* next = curr->next;
+
+        curr->next = prev;
+
+        prev = curr;
+
+        curr = next;
+
+    }
+
+    return prev;
+
+}
+
+ 
+
+bool isPalindrome(node* head) {
+
+    if (head == nullptr || head->next == nullptr)
+
+        return true;
+
+ 
+
+    
+
+    node* slow = head;
+
+    node* fast = head;
+
+    while (fast != nullptr && fast->next != nullptr) {
+
+        slow = slow->next;
+
+        fast = fast->next->next;
+
+    }
+
+ 
+
+    
+
+    node* secondHalf = reverselist(slow->next);
+
+    slow->next = nullptr;
+
+ 
+
+    
+
+    node* p1 = head;
+
+    node* p2 = secondHalf;
+
+    while (p1 != nullptr && p2 != nullptr) {
+
+        if (p1->data != p2->data)
+
+            return false;
+
+        p1 = p1->next;
+
+        p2 = p2->next;
+
+    }
+
+ 
+
+    return true;
+
+}
     
 };
 int main()
