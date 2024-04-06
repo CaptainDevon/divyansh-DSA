@@ -330,7 +330,59 @@ bool isPalindrome(node* head) {
     return true;
 
 }
+node* removeKthNode(node* head, int K)
+
+{
+
+    // Write your code here.
+
+ 
+
+    node* fast = head;
+
+    node* slow = head;
+
+ 
+
+    for(int i=0; i< K; i++){
+
+        fast = fast -> next ;
+
+    }
+
+ 
+
+    if(fast == NULL){
+
+        return  head ->next;
+
+    }
+
+ 
+
+    while(fast -> next!= NULL){
+
+        slow = slow -> next;
+
+        fast = fast -> next;
+
+    }
+
+ 
+
+    node* del = slow -> next;
+
+    slow -> next  = slow ->next -> next;
+
+    delete  (del);
+
+    return head;
+
     
+
+ 
+
+}    
 };
 int main()
 {
